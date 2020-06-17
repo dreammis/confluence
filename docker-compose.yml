@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   confluence:
-    image: haxqer/confluence
+    image: dreammis/confluence
     container_name: confluence-srv
     environment:
       - TZ='Asia/Shanghai'
