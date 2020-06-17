@@ -1,29 +1,27 @@
 # confluence
+
 default port: 8090
 
-## Requirement
-- docker-compose: 17.09.0+
+# Requirement
 
-## How to run with docker-compose
+docker-compose: 17.09.0+
+# How to run with docker-compose
 
 - start confluence & mysql
-
-```
-    git clone https://github.com/haxqer/confluence.git \
+    ```
+git clone https://github.com/dreammis/confluence.git \
         && cd confluence \
-        && docker-compose up
+        && docker-compose up 
 ```
 
 - start confluence & mysql daemon
-
-```
-    docker-compose up -d
+    ``` 
+docker-compose up -d 
 ```
 
 - default db(mysql5.7) configure:
-
-```bash
-    driver=mysql5.7+
+    ```
+driver=mysql5.7+
     host=mysql-confluence
     port=3306
     db=confluence
@@ -31,58 +29,48 @@ default port: 8090
     passwd=123123
 ```
 
-## How to run with docker
-
+# How to run with docker
 - start confluence
-
-```
-    docker run -p 8090:8090 -v ./confluence:/var/confluence --network confluence-network --name confluence-srv -e TZ='Asia/Shanghai' haxqer/confluence
-```
-
+    docker run -p 8090:8090 -v ./confluence:/var/confluence --network confluence-network --name confluence-srv -e TZ='Asia/Shanghai' dreammis/confluence
 - config your own db:
 
-
-## How to hack confluence
-
+# How to hack confluence
 ```
 docker exec confluence-srv java -jar /var/agent/atlassian-agent.jar \
     -p conf \
-    -m haxqer666@gmail.com \
-    -n haxqer666@gmail.com \
+    -m dreammis@gmail.com \
+    -n dreammis@gmail.com \
     -o http://website \
     -s you-server-id-xxxx
 ```
 
-## How to hack confluence plugin
-
+# How to hack confluence plugin
 - .eg I want to use BigGantt plugin
 1. Install BigGantt from confluence marketplace.
-2. Find `App Key` of BigGantt is : `eu.softwareplant.biggantt`
+2. Find App Key of BigGantt is : eu.softwareplant.biggantt
 3. Execute :
-
 ```
 docker exec confluence-srv java -jar /var/agent/atlassian-agent.jar \
     -p eu.softwareplant.biggantt \
-    -m haxqer666@gmail.com \
-    -n haxqer666@gmail.com \
+    -m dreammis@gmail.com \
+    -n dreammis@gmail.com \
     -o http://website \
     -s you-server-id-xxxx
 ```
 
-4. Paste your license 
+4. Paste your license
 
-## Install docker & docker-compose
-- If you use `debian`, just do it.
+# Install docker & docker-compose
+- If you use debian, just do it.
 ```
-    ./script/debian-install-docker.sh
-    ./script/linux-install-docker-compose.sh
+  ./script/debian-install-docker.sh
+  ./script/linux-install-docker-compose.sh
 ```
 
-## Set Proxy
+# Set Proxy
+path : ```~/.docker/config.json```
 
-path : `~/.docker/config.json`
-
-content : 
+content :
 ```
 {
     "proxies": {
@@ -93,4 +81,3 @@ content :
     }
 }
 ```
-
