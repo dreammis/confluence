@@ -1,27 +1,29 @@
 # confluence
-
 default port: 8090
 
-# Requirement
+## Requirement
+- docker-compose: 17.09.0+
 
-docker-compose: 17.09.0+
-# How to run with docker-compose
+## How to run with docker-compose
 
 - start confluence & mysql
-    ```
-git clone https://github.com/dreammis/confluence.git \
+
+```
+    git clone https://github.com/dreammis/confluence.git \
         && cd confluence \
-        && docker-compose up 
+        && docker-compose up
 ```
 
 - start confluence & mysql daemon
-    ``` 
-docker-compose up -d 
+
+```
+    docker-compose up -d
 ```
 
 - default db(mysql5.7) configure:
-    ```
-driver=mysql5.7+
+
+```bash
+    driver=mysql5.7+
     host=mysql-confluence
     port=3306
     db=confluence
@@ -29,12 +31,19 @@ driver=mysql5.7+
     passwd=123123
 ```
 
-# How to run with docker
+## How to run with docker
+
 - start confluence
-    docker run -p 8090:8090 -v ./confluence:/var/confluence --network confluence-network --name confluence-srv -e TZ='Asia/Shanghai' dreammis/confluence
+
+```
+    docker run -p 8090:8090 -v ./confluence:/var/confluence --network confluence-network --name confluence-srv -e TZ='Asia/Shanghai' haxqer/confluence
+```
+
 - config your own db:
 
-# How to hack confluence
+
+## How to hack confluence
+
 ```
 docker exec confluence-srv java -jar /var/agent/atlassian-agent.jar \
     -p conf \
@@ -44,11 +53,13 @@ docker exec confluence-srv java -jar /var/agent/atlassian-agent.jar \
     -s you-server-id-xxxx
 ```
 
-# How to hack confluence plugin
+## How to hack confluence plugin
+
 - .eg I want to use BigGantt plugin
 1. Install BigGantt from confluence marketplace.
-2. Find App Key of BigGantt is : eu.softwareplant.biggantt
+2. Find `App Key` of BigGantt is : `eu.softwareplant.biggantt`
 3. Execute :
+
 ```
 docker exec confluence-srv java -jar /var/agent/atlassian-agent.jar \
     -p eu.softwareplant.biggantt \
@@ -58,19 +69,20 @@ docker exec confluence-srv java -jar /var/agent/atlassian-agent.jar \
     -s you-server-id-xxxx
 ```
 
-4. Paste your license
+4. Paste your license 
 
-# Install docker & docker-compose
-- If you use debian, just do it.
+## Install docker & docker-compose
+- If you use `debian`, just do it.
 ```
-  ./script/debian-install-docker.sh
-  ./script/linux-install-docker-compose.sh
+    ./script/debian-install-docker.sh
+    ./script/linux-install-docker-compose.sh
 ```
 
-# Set Proxy
-path : ```~/.docker/config.json```
+## Set Proxy
 
-content :
+path : `~/.docker/config.json`
+
+content : 
 ```
 {
     "proxies": {
@@ -81,3 +93,4 @@ content :
     }
 }
 ```
+
